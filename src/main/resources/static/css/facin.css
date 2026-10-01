@@ -1,0 +1,61 @@
+:root {
+    --verde-escuro: #1b4332;
+    --azul-esverdeado: #52796f;
+    --menta: #b7e4c7;
+    --ambar: #e9a319;
+    --ambar-hover: #d29314;
+    --fundo: #f3f8f5;
+    --erro: #b3261e;
+}
+* { box-sizing: border-box; }
+body { font-family: 'Inter', Arial, sans-serif; background: var(--fundo); color: #22312b; margin: 0; line-height: 1.5; }
+header.topo { background: var(--verde-escuro); color: #fff; padding: 18px 24px; }
+header.topo .marca { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+header.topo strong { font-family: 'Poppins', Arial, sans-serif; font-size: 24px; letter-spacing: .5px; }
+header.topo span { color: var(--menta); font-size: 14px; }
+header.topo form { margin: 0 0 0 auto; }
+header.topo .sair { background: transparent; color: #fff; border: 1px solid var(--menta); margin: 0; width: auto;
+                    padding: 8px 16px; font-size: 14px; font-weight: 500; }
+header.topo .sair:hover { background: var(--azul-esverdeado); }
+main { padding: 24px; }
+.card { max-width: 440px; margin: 0 auto; background: #fff; padding: 32px; border-radius: 12px;
+        border: 1px solid var(--menta); box-shadow: 0 4px 16px rgba(27,67,50,.08); }
+.card.largo { max-width: 1000px; }
+h1 { font-family: 'Poppins', Arial, sans-serif; color: var(--verde-escuro); margin: 0 0 4px; font-size: 24px; }
+h2 { font-family: 'Poppins', Arial, sans-serif; color: var(--verde-escuro); font-size: 16px;
+     margin: 28px 0 0; padding-bottom: 8px; border-bottom: 2px solid var(--menta); }
+p.sub { color: var(--azul-esverdeado); margin: 0 0 8px; }
+label { display: block; margin-top: 16px; font-weight: 600; font-size: 14px; color: var(--verde-escuro); }
+input[type=text], input[type=password], input[type=search] {
+    width: 100%; padding: 11px 12px; margin-top: 6px; border: 1px solid #c3d3cb; border-radius: 8px;
+    font-size: 15px; font-family: inherit; background: #fff; color: #22312b; }
+input:focus { outline: none; border-color: var(--azul-esverdeado); box-shadow: 0 0 0 3px var(--menta); }
+button, a.botao { display: inline-block; text-align: center; text-decoration: none; cursor: pointer; border: 0;
+    border-radius: 8px; font-family: 'Poppins', Arial, sans-serif; font-weight: 600; font-size: 15px;
+    padding: 12px 20px; background: var(--ambar); color: var(--verde-escuro); transition: background .15s; }
+button:hover, a.botao:hover { background: var(--ambar-hover); }
+button.largura, .card > form > button.largura { width: 100%; margin-top: 26px; }
+button.secundario, a.secundario { background: #fff; color: var(--verde-escuro); border: 1px solid var(--azul-esverdeado); }
+button.secundario:hover, a.secundario:hover { background: var(--menta); }
+button.perigo { background: #fff; color: var(--erro); border: 1px solid var(--erro); padding: 8px 14px; font-size: 13px; }
+button.perigo:hover { background: #fbe9e7; }
+.aviso { padding: 12px 14px; border-radius: 8px; margin: 14px 0 0; font-weight: 600; }
+.aviso.ok { background: var(--menta); color: var(--verde-escuro); }
+.aviso.erro { background: #fbe9e7; color: var(--erro); }
+.barra { display: flex; gap: 10px; align-items: end; margin: 18px 0 8px; flex-wrap: wrap; }
+.barra .campo { flex: 1; min-width: 220px; }
+.barra .campo label { margin-top: 0; }
+.barra form { display: contents; }
+table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; }
+th { text-align: left; background: var(--verde-escuro); color: #fff; padding: 10px 12px; font-weight: 600; }
+td { padding: 10px 12px; border-bottom: 1px solid #e1ece6; vertical-align: middle; }
+tr:nth-child(even) td { background: #f7fbf8; }
+.rolagem { overflow-x: auto; }
+.total { color: var(--azul-esverdeado); font-size: 14px; margin-top: 8px; }
+.vazio { text-align: center; color: var(--azul-esverdeado); padding: 28px 0; }
+dl { display: grid; grid-template-columns: 200px 1fr; gap: 8px 16px; margin: 14px 0 0; }
+dt { font-weight: 600; color: var(--verde-escuro); }
+dd { margin: 0; }
+a { color: var(--azul-esverdeado); }
+footer { text-align: center; color: var(--azul-esverdeado); font-size: 13px; padding: 8px 24px 28px; }
+@media (max-width: 600px) { dl { grid-template-columns: 1fr; } dt { margin-top: 8px; } }

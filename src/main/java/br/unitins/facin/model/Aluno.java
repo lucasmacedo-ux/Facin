@@ -170,4 +170,23 @@ public class Aluno {
 
     public String getTelefone() { return telefone; }
     public void setTelefone(String telefone) { this.telefone = telefone; }
+
+    // ---------- Apresentação do CPF ----------
+
+    /** CPF parcialmente oculto, para a listagem: ***.456.789-** */
+    public String getCpfMascarado() {
+        if (cpf == null || cpf.length() != 11) {
+            return "***";
+        }
+        return "***." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-**";
+    }
+
+    /** CPF completo formatado, usado só na tela de detalhes do administrador. */
+    public String getCpfFormatado() {
+        if (cpf == null || cpf.length() != 11) {
+            return cpf;
+        }
+        return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "."
+                + cpf.substring(6, 9) + "-" + cpf.substring(9);
+    }
 }

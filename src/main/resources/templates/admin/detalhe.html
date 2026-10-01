@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Facin - Detalhes do cadastro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/facin.css}">
+</head>
+<body>
+<header class="topo">
+    <div class="marca">
+        <strong>Facin</strong><span>Painel do administrador</span>
+        <form th:action="@{/logout}" method="post"><button type="submit" class="sair">Sair</button></form>
+    </div>
+</header>
+<main>
+<div class="card largo">
+    <h1 th:text="${aluno.nome}">Nome</h1>
+    <p class="sub">Detalhes do cadastro</p>
+
+    <h2>Dados pessoais</h2>
+    <dl>
+        <dt>Estado civil</dt><dd th:text="${aluno.estadoCivil}"></dd>
+        <dt>Nacionalidade</dt><dd th:text="${aluno.nacionalidade}"></dd>
+        <dt>Sexo</dt><dd th:text="${aluno.sexo}"></dd>
+        <dt>Data de nascimento</dt><dd th:text="${#temporals.format(aluno.dataNascimento, 'dd/MM/yyyy')}"></dd>
+        <dt>Naturalidade</dt><dd th:text="${aluno.naturalidade}"></dd>
+        <dt>CPF</dt><dd th:text="${aluno.cpfFormatado}"></dd>
+    </dl>
+
+    <h2>Filiação</h2>
+    <dl>
+        <dt>Mãe</dt><dd th:text="${aluno.nomeMae}"></dd>
+        <dt>Pai</dt><dd th:text="${aluno.nomePai != null and !aluno.nomePai.isBlank()} ? ${aluno.nomePai} : 'Não informado'"></dd>
+    </dl>
+
+    <h2>Formação</h2>
+    <dl>
+        <dt>Formação</dt><dd th:text="${aluno.formacao}"></dd>
+        <dt>Cidade/Estado</dt><dd th:text="${aluno.cidadeEstadoFormacao}"></dd>
+        <dt>Grau</dt><dd th:text="${aluno.grau}"></dd>
+        <dt>Ano de conclusão</dt><dd th:text="${aluno.anoConclusao}"></dd>
+    </dl>
+
+    <h2>Contato</h2>
+    <dl>
+        <dt>Endereço</dt><dd th:text="${aluno.endereco}"></dd>
+        <dt>E-mail</dt><dd th:text="${aluno.email}"></dd>
+        <dt>Telefone</dt><dd th:text="${aluno.telefone}"></dd>
+    </dl>
+
+    <p style="margin-top:28px"><a class="botao secundario" th:href="@{/admin}">Voltar à lista</a></p>
+</div>
+</main>
+<footer>Facin - Unitins</footer>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Facin - Cadastros</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/facin.css}">
+</head>
+<body>
+<header class="topo">
+    <div class="marca">
+        <strong>Facin</strong><span>Painel do administrador</span>
+        <form th:action="@{/logout}" method="post"><button type="submit" class="sair">Sair</button></form>
+    </div>
+</header>
+<main>
+<div class="card largo">
+    <h1>Cadastros de alunos</h1>
+    <p class="sub">Consulte, pesquise e gerencie os cadastros recebidos.</p>
+
+    <div class="aviso ok" th:if="${mensagem}" th:text="${mensagem}"></div>
+
+    <div class="barra">
+        <form th:action="@{/admin}" method="get">
+            <div class="campo">
+                <label for="busca">Buscar por nome</label>
+                <input type="search" id="busca" name="busca" th:value="${busca}" placeholder="Digite parte do nome">
+            </div>
+            <button type="submit">Buscar</button>
+            <a class="botao secundario" th:href="@{/admin}" th:if="${busca != null and !busca.isBlank()}">Limpar</a>
+        </form>
+    </div>
+
+    <div class="total" th:text="|${alunos.size()} cadastro(s) encontrado(s)|"></div>
+
+    <div class="rolagem" th:if="${!alunos.isEmpty()}">
+        <table>
+            <thead>
+                <tr><th>Nome</th><th>CPF</th><th>E-mail</th><th>Telefone</th><th>Formação</th><th>Ações</th></tr>
+            </thead>
+            <tbody>
+                <tr th:each="a : ${alunos}">
+                    <td th:text="${a.nome}"></td>
+                    <td th:text="${a.cpfMascarado}"></td>
+                    <td th:text="${a.email}"></td>
+                    <td th:text="${a.telefone}"></td>
+                    <td th:text="${a.formacao}"></td>
+                    <td style="white-space:nowrap">
+                        <a class="botao secundario" style="padding:8px 14px;font-size:13px"
+                           th:href="@{/admin/alunos/{id}(id=${a.id})}">Ver</a>
+                        <form th:action="@{/admin/alunos/{id}/excluir(id=${a.id})}" method="post" style="display:inline"
+                              onsubmit="return confirm('Excluir este cadastro? Esta ação não pode ser desfeita.');">
+                            <button type="submit" class="perigo">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="vazio" th:if="${alunos.isEmpty()}">Nenhum cadastro encontrado.</div>
+</div>
+</main>
+<footer>Facin - Unitins</footer>
+</body>
+</html>

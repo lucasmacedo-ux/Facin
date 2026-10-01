@@ -23,12 +23,12 @@ Digitalizar o cadastro de alunos, permitindo que cada aluno registre seus dados 
 
 ### Planejadas
 
-- [ ] Tela de login (aluno e administrador)
-- [x] Tela de cadastro/inserção de dados pessoais do aluno (Incremento I, em teste)
-- [ ] Painel do administrador com listagem, busca, edição e exclusão de cadastros
+- [x] Tela de login do administrador
+- [x] Tela de cadastro/inserção de dados pessoais do aluno (Incremento I, em teste; campos: dados pessoais, filiação, formação e contato)
+- [x] Painel do administrador com listagem, busca por nome, detalhes e exclusão de cadastros
 - [x] Validação dos campos (CPF, e-mail, telefone, campos obrigatórios)
 - [x] Gravação em banco de dados MySQL
-- [ ] Senhas armazenadas com hash (nunca em texto puro)
+- [x] Senhas armazenadas com hash BCrypt (nunca em texto puro)
 
 ### Em desenvolvimento
 
@@ -45,7 +45,7 @@ Ação do usuário → entrada dos dados → processamento e validação → arm
 ## Tecnologias
 
 - **Linguagem:** Java 17
-- **Framework:** Spring Boot 3 (Web, Data JPA, Validation)
+- **Framework:** Spring Boot 3 (Web, Data JPA, Validation, Security)
 - **Interface:** HTML com Thymeleaf
 - **Banco de dados:** MySQL
 - **Controle de versão:** Git e GitHub
@@ -63,11 +63,15 @@ cd facin
 export DB_USER=seu_usuario
 export DB_PASSWORD=sua_senha
 
+# 2.1 Definir o administrador inicial (criado na primeira execução)
+export ADMIN_USER=nome_do_admin
+export ADMIN_PASSWORD=senha_do_admin
+
 # 3. Executar
 mvn spring-boot:run
 ```
 
-Depois acesse http://localhost:8080/cadastro.
+Depois acesse http://localhost:8080/cadastro (formulário do aluno) ou http://localhost:8080/login (área do administrador).
 
 ## Segurança e privacidade
 
@@ -77,7 +81,7 @@ Depois acesse http://localhost:8080/cadastro.
 
 ## Status do projeto
 
-🚧 Em desenvolvimento – Incremento I.
+🚧 Em desenvolvimento – Incrementos I (cadastro) e II (login e painel do administrador).
 
 ## Autor
 
