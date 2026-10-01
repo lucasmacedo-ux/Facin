@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Facin - Cadastro de Aluno</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde-escuro: #1b4332;
+            --azul-esverdeado: #52796f;
+            --menta: #b7e4c7;
+            --ambar: #e9a319;
+            --ambar-hover: #d29314;
+            --fundo: #f3f8f5;
+            --erro: #b3261e;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', Arial, sans-serif; background: var(--fundo); color: #22312b;
+               margin: 0; line-height: 1.5; }
+        header.topo { background: var(--verde-escuro); color: #fff; padding: 18px 24px; }
+        header.topo .marca { max-width: 620px; margin: 0 auto; display: flex; align-items: baseline; gap: 12px; }
+        header.topo strong { font-family: 'Poppins', Arial, sans-serif; font-size: 24px; letter-spacing: .5px; }
+        header.topo span { color: var(--menta); font-size: 14px; }
+        main { padding: 24px; }
+        .card { max-width: 620px; margin: 0 auto; background: #fff; padding: 32px; border-radius: 12px;
+                border: 1px solid var(--menta); box-shadow: 0 4px 16px rgba(27,67,50,.08); }
+        h1 { font-family: 'Poppins', Arial, sans-serif; color: var(--verde-escuro); margin: 0 0 4px; font-size: 24px; }
+        p.sub { color: var(--azul-esverdeado); margin: 0 0 8px; }
+        h2 { font-family: 'Poppins', Arial, sans-serif; color: var(--verde-escuro); font-size: 16px;
+             margin: 30px 0 0; padding-bottom: 8px; border-bottom: 2px solid var(--menta); }
+        label { display: block; margin-top: 16px; font-weight: 600; font-size: 14px; color: var(--verde-escuro); }
+        input, select { width: 100%; padding: 11px 12px; margin-top: 6px; border: 1px solid #c3d3cb;
+                        border-radius: 8px; font-size: 15px; font-family: inherit; background: #fff; color: #22312b; }
+        input:focus, select:focus { outline: none; border-color: var(--azul-esverdeado);
+                                    box-shadow: 0 0 0 3px var(--menta); }
+        .erro { color: var(--erro); font-size: 13px; margin-top: 4px; }
+        .ok { background: var(--menta); color: var(--verde-escuro); padding: 14px; border-radius: 8px;
+              margin: 12px 0 4px; font-weight: 600; }
+        button { margin-top: 30px; width: 100%; padding: 14px; background: var(--ambar); color: var(--verde-escuro);
+                 border: 0; border-radius: 8px; font-family: 'Poppins', Arial, sans-serif; font-size: 16px;
+                 font-weight: 600; cursor: pointer; transition: background .15s; }
+        button:hover { background: var(--ambar-hover); }
+        button:focus-visible { outline: 3px solid var(--azul-esverdeado); outline-offset: 2px; }
+        footer { text-align: center; color: var(--azul-esverdeado); font-size: 13px; padding: 8px 24px 28px; }
+    </style>
+</head>
+<body>
+<header class="topo">
+    <div class="marca"><strong>Facin</strong><span>Fácil Informação</span></div>
+</header>
+<main>
+<div class="card">
+    <h1>Cadastro de Aluno</h1>
+    <p class="sub">Preencha seus dados. Eles ficam armazenados com segurança no banco de dados da instituição.</p>
+
+    <div class="ok" th:if="${mensagem}" th:text="${mensagem}"></div>
+
+    <form th:action="@{/cadastro}" th:object="${aluno}" method="post">
+        <h2>Dados pessoais</h2>
+
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" th:field="*{nome}">
+        <div class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+
+        <label for="estadoCivil">Estado civil</label>
+        <select id="estadoCivil" th:field="*{estadoCivil}">
+            <option value="">Selecione</option>
+            <option th:value="'Solteiro(a)'" th:text="'Solteiro(a)'"></option>
+            <option th:value="'Casado(a)'" th:text="'Casado(a)'"></option>
+            <option th:value="'União estável'" th:text="'União estável'"></option>
+            <option th:value="'Separado(a)'" th:text="'Separado(a)'"></option>
+            <option th:value="'Divorciado(a)'" th:text="'Divorciado(a)'"></option>
+            <option th:value="'Viúvo(a)'" th:text="'Viúvo(a)'"></option>
+        </select>
+        <div class="erro" th:if="${#fields.hasErrors('estadoCivil')}" th:errors="*{estadoCivil}"></div>
+
+        <label for="nacionalidade">Nacionalidade</label>
+        <input type="text" id="nacionalidade" th:field="*{nacionalidade}" placeholder="Brasileira">
+        <div class="erro" th:if="${#fields.hasErrors('nacionalidade')}" th:errors="*{nacionalidade}"></div>
+
+        <label for="sexo">Sexo</label>
+        <select id="sexo" th:field="*{sexo}">
+            <option value="">Selecione</option>
+            <option th:value="'Feminino'" th:text="'Feminino'"></option>
+            <option th:value="'Masculino'" th:text="'Masculino'"></option>
+            <option th:value="'Outro'" th:text="'Outro'"></option>
+            <option th:value="'Prefiro não informar'" th:text="'Prefiro não informar'"></option>
+        </select>
+        <div class="erro" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></div>
+
+        <label for="dataNascimento">Data de nascimento</label>
+        <input type="date" id="dataNascimento" th:field="*{dataNascimento}">
+        <div class="erro" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></div>
+
+        <label for="naturalidade">Naturalidade</label>
+        <input type="text" id="naturalidade" th:field="*{naturalidade}" placeholder="Cidade/Estado onde nasceu">
+        <div class="erro" th:if="${#fields.hasErrors('naturalidade')}" th:errors="*{naturalidade}"></div>
+
+        <label for="cpf">CPF</label>
+        <input type="text" id="cpf" th:field="*{cpf}" placeholder="000.000.000-00">
+        <div class="erro" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
+
+        <h2>Filiação</h2>
+
+        <label for="nomeMae">Nome da mãe</label>
+        <input type="text" id="nomeMae" th:field="*{nomeMae}">
+        <div class="erro" th:if="${#fields.hasErrors('nomeMae')}" th:errors="*{nomeMae}"></div>
+
+        <label for="nomePai">Nome do pai (opcional)</label>
+        <input type="text" id="nomePai" th:field="*{nomePai}">
+        <div class="erro" th:if="${#fields.hasErrors('nomePai')}" th:errors="*{nomePai}"></div>
+
+        <h2>Formação</h2>
+
+        <label for="formacao">Formação</label>
+        <input type="text" id="formacao" th:field="*{formacao}" placeholder="Ex.: Sistemas de Informação">
+        <div class="erro" th:if="${#fields.hasErrors('formacao')}" th:errors="*{formacao}"></div>
+
+        <label for="cidadeEstadoFormacao">Cidade/Estado</label>
+        <input type="text" id="cidadeEstadoFormacao" th:field="*{cidadeEstadoFormacao}" placeholder="Ex.: Palmas/TO">
+        <div class="erro" th:if="${#fields.hasErrors('cidadeEstadoFormacao')}" th:errors="*{cidadeEstadoFormacao}"></div>
+
+        <label for="grau">Grau</label>
+        <select id="grau" th:field="*{grau}">
+            <option value="">Selecione</option>
+            <option th:value="'Ensino Médio'" th:text="'Ensino Médio'"></option>
+            <option th:value="'Técnico'" th:text="'Técnico'"></option>
+            <option th:value="'Graduação'" th:text="'Graduação'"></option>
+            <option th:value="'Especialização'" th:text="'Especialização'"></option>
+            <option th:value="'Mestrado'" th:text="'Mestrado'"></option>
+            <option th:value="'Doutorado'" th:text="'Doutorado'"></option>
+        </select>
+        <div class="erro" th:if="${#fields.hasErrors('grau')}" th:errors="*{grau}"></div>
+
+        <label for="anoConclusao">Ano de conclusão</label>
+        <input type="number" id="anoConclusao" th:field="*{anoConclusao}" placeholder="2024">
+        <div class="erro" th:if="${#fields.hasErrors('anoConclusao')}" th:errors="*{anoConclusao}"></div>
+
+        <h2>Contato</h2>
+
+        <label for="endereco">Endereço</label>
+        <input type="text" id="endereco" th:field="*{endereco}" placeholder="Rua, número, bairro, cidade">
+        <div class="erro" th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}"></div>
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" th:field="*{email}">
+        <div class="erro" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+        <label for="telefone">Telefone</label>
+        <input type="text" id="telefone" th:field="*{telefone}" placeholder="(63) 91234-5678">
+        <div class="erro" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
+
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+</main>
+<footer>Facin - Unitins</footer>
+</body>
+</html>
